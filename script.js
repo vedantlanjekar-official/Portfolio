@@ -1,4 +1,4 @@
-// Tagline Animation
+// Tagline Animation - Typewriter Effect
 const taglineElement = document.getElementById('tagline');
 const taglines = [
     'I am Vibe Coder',
@@ -7,21 +7,48 @@ const taglines = [
 ];
 
 let currentTaglineIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100; // milliseconds per character
+let deletingSpeed = 50; // milliseconds per character when deleting
+let pauseTime = 2000; // pause time after completing a tagline
 
-function updateTagline() {
-    taglineElement.style.opacity = '0';
-    taglineElement.style.transform = 'translateY(20px)';
+function typeWriter() {
+    const currentTagline = taglines[currentTaglineIndex];
     
-    setTimeout(() => {
-        currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
-        taglineElement.textContent = taglines[currentTaglineIndex];
-        taglineElement.style.opacity = '1';
-        taglineElement.style.transform = 'translateY(0)';
-    }, 500);
+    if (isDeleting) {
+        // Delete characters
+        taglineElement.textContent = currentTagline.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        
+        if (currentCharIndex === 0) {
+            isDeleting = false;
+            currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+            setTimeout(typeWriter, pauseTime);
+            return;
+        }
+        
+        setTimeout(typeWriter, deletingSpeed);
+    } else {
+        // Type characters
+        taglineElement.textContent = currentTagline.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+        
+        if (currentCharIndex === currentTagline.length) {
+            // Finished typing, wait then start deleting
+            setTimeout(() => {
+                isDeleting = true;
+                typeWriter();
+            }, pauseTime);
+            return;
+        }
+        
+        setTimeout(typeWriter, typingSpeed);
+    }
 }
 
-// Start the tagline animation
-setInterval(updateTagline, 3000);
+// Start the typewriter animation
+typeWriter();
 
 // Smooth scroll for navigation (if needed)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
