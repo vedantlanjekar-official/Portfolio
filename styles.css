@@ -208,15 +208,15 @@ body {
 
 /* Light Mode: Hero Section - White Background */
 body.light-mode .hero-section {
-    background: #ffffff;
+    background: #ffffff !important;
 }
 
 body.light-mode .hero-section::before {
-    display: none;
+    display: none !important;
 }
 
 body.light-mode .hero-section::after {
-    display: none;
+    display: none !important;
 }
 
 @keyframes float {
@@ -243,7 +243,7 @@ body.light-mode .hero-section::after {
 .hero-content {
     max-width: 800px;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .photo-container {
@@ -421,6 +421,8 @@ body.light-mode .hero-section::after {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    position: relative;
+    z-index: 10;
 }
 
 .cv-download-btn {
@@ -430,7 +432,7 @@ body.light-mode .hero-section::after {
     gap: 10px;
     padding: 14px 32px;
     background: linear-gradient(135deg, var(--icon-indigo) 0%, var(--icon-purple) 100%);
-    color: white;
+    color: white !important;
     text-decoration: none;
     border-radius: 50px;
     font-size: 1rem;
@@ -440,6 +442,9 @@ body.light-mode .hero-section::after {
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     backdrop-filter: blur(10px);
     letter-spacing: 0.5px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .cv-download-btn i {
@@ -456,6 +461,18 @@ body.light-mode .hero-section::after {
 
 .cv-download-btn:hover i {
     transform: translateY(-2px);
+}
+
+/* Light mode styles for CV button */
+body.light-mode .cv-download-btn {
+    background: linear-gradient(135deg, var(--icon-indigo) 0%, var(--icon-purple) 100%);
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+body.light-mode .cv-download-btn:hover {
+    background: linear-gradient(135deg, var(--icon-purple) 0%, var(--icon-pink) 100%);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6), 0 0 20px rgba(99, 102, 241, 0.4);
 }
 
 @keyframes slideIn {
